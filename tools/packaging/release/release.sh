@@ -51,7 +51,7 @@ function _check_required_env_var()
 
 function _release_version()
 {
-	cat "${repo_root_dir}/VERSION"
+	echo $(cat "${repo_root_dir}/VERSION")-test
 }
 
 function _create_our_own_notes()
@@ -63,7 +63,7 @@ function _create_our_own_notes()
 	libseccomp_version=$(get_from_kata_deps "externals.libseccomp.version")
 	libseccomp_url=$(get_from_kata_deps "externals.libseccomp.url")
 
-	cat >> /tmp/our_notes_${RELEASE_VERSION} <<EOF 
+	cat >> /tmp/our_notes_${RELEASE_VERSION} <<EOF
 ## Survey
 
 Please take the Kata Containers survey:
