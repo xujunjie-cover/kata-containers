@@ -20,6 +20,8 @@ mod tap_endpoint;
 pub use tap_endpoint::TapEndpoint;
 mod vhost_user_endpoint;
 pub use vhost_user_endpoint::VhostUserEndpoint;
+mod vtap_endpoint;
+pub use vtap_endpoint::VtapEndpoint;
 
 use anyhow::Result;
 use async_trait::async_trait;

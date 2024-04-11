@@ -25,6 +25,7 @@ use tokio::sync::RwLock;
 use super::{
     endpoint::{
         Endpoint, IPVlanEndpoint, MacVlanEndpoint, PhysicalEndpoint, VethEndpoint, VlanEndpoint,
+        VtapEndpoint,
     },
     network_entity::NetworkEntity,
     network_info::network_info_from_link::{handle_addresses, NetworkInfoFromLink},
@@ -271,6 +272,18 @@ async fn create_endpoint(
                     handle,
                     &attrs.name,
                     idx,
+                    &config.network_model,
+                    config.queues,
+                )
+                .await
+                .context("macvlan endpoint")?;
+                Arc::new(ret)
+            }
+            "macvtap" | "ipvtap" => {
+                let ret = VtapEndpoint::new(
+                    &d,
+                    handle,
+                    &attrs.name,
                     &config.network_model,
                     config.queues,
                 )
